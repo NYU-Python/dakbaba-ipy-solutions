@@ -17,6 +17,6 @@ for line in open(filename):
 #slice what I need
 sliced_list = company_list[0:days+1]
 
-average = sum(sliced_list)/days
+average_price = sum(sliced_list)/len(sliced_list)
 
-print company_name average
+print company_name+" "+average_price
