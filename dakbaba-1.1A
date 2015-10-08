@@ -19,4 +19,4 @@ sliced_list = company_list[0:days+1]
 
 average_price = sum(sliced_list)/len(sliced_list)
 
-print company_name+": "+average_price
+print "{}:{}".format(company_name, average_price)
