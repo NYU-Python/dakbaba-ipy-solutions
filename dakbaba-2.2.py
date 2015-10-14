@@ -1,21 +1,22 @@
 #!/usr/bin/env python
 
-fh = 'bitly.tsv'
+fh = open('bitly.tsv')
 
 #A set of unique cities represented in the data, sorted by name
 def cities():
-	city_set = {}
+	city_set = set([])
 	
-	lines = fh.readlines():
+	lines = fh.readlines()
 	data_lines = lines[1:]
 	
 	for line in data_lines:
 		elements = line.split('\t')
 		city_set.add(elements[3])
 
+	sorted_cities = sorted(list(city_set))
 
-
-	print "This is the list of sorted, unique cities: {}".format(city_set.sort())
+	print "This is the list of sorted, unique cities: {}"
+	print sorted_cities
 
 #The "top ten" country_code values (use a dictionary sorted by value)
 def top_countries():
