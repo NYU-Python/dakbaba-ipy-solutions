@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 fh = 'bitly.tsv'
 
 #A set of unique cities represented in the data, sorted by name
@@ -58,11 +60,11 @@ def machine():
 print "Please tell me if you'd like to see info about cities, countries, or machines"
 answer = raw_input(' ')
 
-if answer = 'cities':
+if answer == 'cities':
 	cities()
-elif answer = 'countries':
+elif answer == 'countries':
 	top_countries()
-elif answer = 'machines':
+elif answer == 'machines':
 	machine()
 else:
 	print 'Sorry, could not compute'	
