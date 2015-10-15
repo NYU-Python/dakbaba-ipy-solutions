@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 fh = open('bitly.tsv')
 
 #A set of unique cities represented in the data, sorted by name
@@ -35,7 +36,7 @@ def top_countries():
 		else:
 			country_dict[country_code] = 1
 
-	sorted_countries_by_value = sorted(country_dict, key=country_dict.get)
+	country_dict = sorted(country_dict, key=country_dict.get)
 
 	printed_values = list(country_dict)[:9]
 
@@ -45,20 +46,27 @@ def top_countries():
 def machine():
 	machine_dict = {}
 
-	for line in open(fh)[1:]:
+	lines = fh.readlines()
+	data_lines = lines[1:]
+
+	for line in data_lines:
 		data = line.split('\t')
 
-	long_url = data[2]
-	machine = long_url.split('/')[2]
+		long_url = data[2]
+		machine = long_url.split('/')[2]
 
-	if machine in machine_dict:
-		machine_dict[machine] += 1
-	else:
-		machine_dict[machine] = 1
+		machine_dict[machine] = 0
 
-	sorted_machines_by_value = sorted(machine_dict, machine_dict.get)
+		if machine in machine_dict:
+			machine_dict[machine] += 1
+		else:
+			machine_dict[machine] = 1
 
-	print 'These are the top ten machine values:{}'.format(machine_dict[:9])
+	machine_dict = sorted(machine_dict, key = machine_dict.get)
+
+	printed_values = list(machine_dict)[:9] 
+
+	print 'These are the top ten machine values: {}'.format(printed_values)
 
 
 ####################
@@ -74,4 +82,4 @@ elif answer == 'countries':
 elif answer == 'machines':
 	machine()
 else:
-	print 'Sorry, could not compute'	
+	print 'Sorry, could not compute'
