@@ -18,9 +18,16 @@ for item in args:
 
 
 #check that required fields are there
-missing = list(required_args.difference(argdict))
+missing = required_args.difference(argdict)
+
 if len(missing) > 0:
-	print 'ERROR: {} missing. Please try again'.format(missing)
+	print 'ERROR: Info missing. Please try again'
+	if 'to' in missing:
+		recipient = raw_input('Who will this email be sent to?:' )
+		argdict['to'] = recipient
+	else:
+		sender = raw_input('Who is sending this email?:' )
+		argdict['from'] = sender
 else:
 	print 'Sending message'
 
@@ -33,3 +40,9 @@ subject: {2}'''
 header = template.format(argdict['from'],argdict['to'],argdict['subject'])
 
 print header
+
+
+msg = header + argdict['body']
+sendmail = os.popen(sendmail_prog + " -t", "w")
+sendmail.write(msg)
+sendmail.close()
