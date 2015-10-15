@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import os
 import sys
 
@@ -9,10 +11,14 @@ args = sys.argv[1:]
 
 #initialize dictionary
 argdict = {}
-#split the inputs given that '=' is used
-key, val = arg.split('=')
-#set the key
-argdict[key] = val
+
+for item in args:
+	elements = item.split('=')
+	argdict[elements[0]] = elements[1]
+
+print argdict
+
+
 
 #check that required fields are there
 missing = required_args.difference(argdict)
@@ -25,6 +31,8 @@ To: {1}
 subject: {2}'''
 
 header = template.format(argdict['from'],argdict['to'],argdict['subject'])
+
+header
 
 msg = header + argdict['body']
 sendmail = os.popen(sendmail_prog + " -t", "w")
