@@ -16,13 +16,13 @@ for item in args:
 	elements = item.split('=')
 	argdict[elements[0]] = elements[1]
 
-print argdict
-
-
 
 #check that required fields are there
-missing = required_args.difference(argdict)
-print 'ERROR: {} missing. Please try again'.format(missing)
+missing = list(required_args.difference(argdict))
+if len(missing) > 0:
+	print 'ERROR: {} missing. Please try again'.format(missing)
+else:
+	print 'Sending message'
 
 #how do I only ask for a certain piece of info?
 
@@ -32,9 +32,4 @@ subject: {2}'''
 
 header = template.format(argdict['from'],argdict['to'],argdict['subject'])
 
-header
-
-msg = header + argdict['body']
-sendmail = os.popen(sendmail_prog + " -t", "w")
-sendmail.write(msg)
-sendmail.close(
+print header
