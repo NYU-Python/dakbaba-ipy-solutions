@@ -21,19 +21,25 @@ def cities():
 #The "top ten" country_code values (use a dictionary sorted by value)
 def top_countries():
 	country_dict = {}
+	
+	lines = fh.readlines()
+	data_lines = lines[1:]
 
-	for line in open(fh)[1:]:
+
+	for line in data_lines:
 		data = line.split('\t')
+		country_code = data[4]
+		country_dict[country_code] = 0
+		if country_code in country_dict:
+			country_dict[country_code] += 1
+		else:
+			country_dict[country_code] = 1
 
-	country_code = data[4]
-	if country_code in country_dict:
-		country_dict[country_code] += 1
-	else:
-		country_dict[country_code] = 1
+	sorted_countries_by_value = sorted(country_dict, key=country_dict.get)
 
-	sorted_countries_by_value = sorted(country_dict, country_dict.get)
+	printed_values = list(country_dict)[:9]
 
-	print 'These are the top ten country_code values:{}'.format(country_dict[:9])
+	print 'These are the top ten country_code values:{}'.format(printed_values)
 
 #The "top ten" machine_name values (derived from the long_url field)
 def machine():
