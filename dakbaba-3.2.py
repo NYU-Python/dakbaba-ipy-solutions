@@ -37,6 +37,8 @@ def dict_of_dict(inner, outer, value):
 	lines = fh.readlines()
 	data_lines = lines[1:]
 
+
+	#here I am associating column headers with number
 	for el in lines[0].split('\t'):
 		index_dic[el] = i
 		i += 1	
@@ -48,13 +50,12 @@ def dict_of_dict(inner, outer, value):
 
 
 	for line in data_lines:
-		timestamp, short_url_cname, long_url, geo_city_name,country_code,geo_region,timezone,lat,longitude = line.split('\t')
-
-		outer_dict[outer_key][inner_key] = 0
+		data = line.split('\t')
+		inner_key = data[inner_key]
+		outer_key = data[outer_key]
 
 		if outer_key not in outer_dict:
-			outer_dict[outer_key] += 1
-			outer_dict[outer_key][inner_key] += 1
+			outer_dict[outer_key][inner_key] = 1
 		else:
 			if inner_key not in outer_dict[outer_key][inner_key]:
 				outer_dict[outer_key][inner_key] = 1
