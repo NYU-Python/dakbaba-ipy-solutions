@@ -22,16 +22,6 @@ missing = required_args.difference(argdict)
 
 if len(missing) > 0:
 	print 'ERROR: Info missing. Please try again'
-	if 'to' in missing:
-		recipient = raw_input('Who will this email be sent to?:' )
-		argdict['to'] = recipient
-	else:
-		sender = raw_input('Who is sending this email?:' )
-		argdict['from'] = sender
-else:
-	print 'Sending message'
-
-#how do I only ask for a certain piece of info?
 
 template = '''From: {0}
 To: {1}
