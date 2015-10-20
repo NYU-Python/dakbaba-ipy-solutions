@@ -16,6 +16,7 @@ args = parser.parse_args()
 this_dir = args.dir
 filedic = {}
 filelist = []
+filetup = ()
 
 
 if args.dir == '.':
@@ -23,11 +24,11 @@ if args.dir == '.':
 else:
     this_dir = args.dir
 
-try:
-   fh = open(this_dir)
-except IOError:
-   print 'The directory {} does not exist'.format(this_dir)
-   exit()
+# try:
+#    fh = open(this_dir)
+# except IOError:
+#    print 'The directory {} does not exist'.format(this_dir)
+#    exit()
 
 def create_dict(directory):
 	for listing in os.listdir(this_dir):
@@ -36,12 +37,14 @@ def create_dict(directory):
 	        moddate = time.ctime(os.path.getmtime(filepath))
 	        filelen = os.path.getsize(filepath)
 	        filename = os.path.basename(filepath)
-	    filedic[filename]={'filesize':filelen, 'filedate':moddate}
+	    filedic[filename]={'size':filelen, 'filedate':moddate}
 
 
 def create_list(dictionary):
 	for fn in dictionary:
-		filelist.append(fn,dictionary[fn])
+		filetuple = fn, dictionary[fn]
+		filelist.append(filetuple)
+
 
 def sorting(by, how, howmany):
 	if how == 'ascending':
