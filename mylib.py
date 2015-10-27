@@ -17,7 +17,7 @@ class Logger(object):
 
 
 		filename = os.path.basename(args[0])
-		priority = args[1].UPPER
+		priority = args[1].upper()
 		priorities = {'DEBUG': 1, 'INFO': 2, 'WARNING': 3, 'ERROR': 4, 'CRITICAL': 5}
 		priority = int(priorities.get(priority))
 		write_date = args[2]
