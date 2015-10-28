@@ -9,7 +9,6 @@ import time
 class Logger(object):
 	def __init__(self, filename, priority, datetime, scriptname):
 		self.filename = filename
-		print (self.filename)
 		self.priority = priority
 		self.datetime = datetime
 		self.scriptname = scriptname
@@ -45,23 +44,22 @@ class Logger(object):
 	#calls compose_prepend() to retrieve data and/por filename
 	#opens the file and write the log line
 	def write_log(self, msg, priorities):
-		self.compose_prepend()
+		self.compose_prepend(msg)
 
 
 	#checks the instance to see whether a date and/or filename are desired
-	def compose_prepend(self):
+	def compose_prepend(self, msg):
 		log_line_spacer = "    "
 		#open file
 		fh = open(self.filename, 'wb')
 		#write msg in file
 		if self.datetime:
 			#prepend file with
-			time_date =  time.ctime()
-			fh.writelines(time_date + log_line_spacer)
+			time_date =  time.ctime().encode()
+			fh.write(time_date + log_line_spacer.encode())
 		if self.scriptname:
 			#prepend file with
-			fh.writelines(self.filename + log_line_spacer)
+			fh.write(self.filename.encode() + log_line_spacer.encode())
+		fh.write(msg.encode())
 		
-		#print results
-		print (fh.read())
 		fh.close()
