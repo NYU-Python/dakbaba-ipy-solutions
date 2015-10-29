@@ -13,36 +13,24 @@ class Logger(object):
 
 	#may not need number in write_log
 	def debug(self, msg):
-		if self.priority >= 1: 
-			self.write_log(msg, 1)
-		else:
-			print ("Can't run debug")
+		self.write_log(msg, 1)
 	def info(self, msg):
-		if self.priority >= 2:
-			self.write_log(msg, 2)
-		else:
-			print ("Can't run info")
+		self.write_log(msg, 2)
 	def warning(self, msg):
-		if self.priority >= 3:
-			self.write_log(msg, 3)
-		else:
-			print ("Can't run warning")
+		self.write_log(msg, 3)
 	def error(self, msg):
-		if self.priority >= 4:
-			self.write_log(msg, 4)
-		else:
-			print ("Can't run error")	
+		self.write_log(msg, 4)
 	def critical(self, msg):
-		if self.priority == 5:
-			self.write_log(msg, 5)
-		else:
-			print ("Can't run critical")
+		self.write_log(msg, 5)
 
 	#this will take in the priorities argument, and go from there
 	#calls compose_prepend() to retrieve data and/por filename
 	#opens the file and write the log line
-	def write_log(self, msg, priorities):
-		self.compose_prepend(msg)
+	def write_log(self, msg, priority):
+		if self.priority <= priority:
+			self.compose_prepend(msg)
+		else:
+			print ("Can't run")
 
 
 	#checks the instance to see whether a date and/or filename are desired
