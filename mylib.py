@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-import sys
-import os
-import time
+import sys, os, time
 
 
 #The priority levels should probably be converted to an integer scale
