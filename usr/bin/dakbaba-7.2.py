@@ -1,4 +1,4 @@
 #!/usr/bin/env python
 
 import subprocess
-doc=subprocess.call(['curl', 'http://www.nytimes.com', '>', 'nytimes.html'])
+subprocess.call(['curl', 'http://www.nytimes.com'], stdout=open('nytimes.html', 'w+'))
