@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+
+import timeit
+
+"""
+loop through the words file
+• lowercase and strip each element of punctuation ('.,:;!?')
+• return a list containing the lowercased, stripped words
+"""
+new_list = []
+#a for loop (i.e., start with an empty list, loop through the file and append each processed word to the empty list, then return the list)
+def forloop(fh):
+	for lines in fh.readlines():
+		lines = lines.lower().strip('.,:;!?\n')
+		new_list.append(lines)
+
+	return new_list
+
+
+#a list comprehension (i.e., a "transforming" one)
+
+def listcomp(fh):
+	lines = fh.readlines()
+	new_list = [line.lower().strip('.,:;!?\n') for line in lines]
+
+	return new_list
+
+
+#a generator comprehension (very similar to the above)
+
+def gencomp(fh):
+	new_list = (lines.fh.readlines().lower().strip('.,:;!?\n') for line in lines)
+
+	return new_list
+
+
+#map() (for this, you may have to use a lambda function or a nested map() call)
+
+def mapfunc(fh):
+	new_list = map(lambda line: line.lower().strip('.,:;!?\n'), fh.readlines())
+
+	return new_list
+
+
+
+def main():
+
+	forlooptime = timeit.timeit('forloop(fh)', setup='from __main__ import forloop, fh', number=1000)
+
+	forlisttime = timeit.timeit('listcomp(fh)', setup='from __main__ import listcomp, fh', number=1000)	
+
+	forgentime = timeit.timeit('gencomp(fh)', setup='from __main__ import gencomp, fh', number=1000)
+
+	formaptime = timeit.timeit('mapfunc(fh)', setup='from __main__ import mapfunc, fh', number=1000)
+
+	print "It took {0} usec to run for loop".format(forlooptime)
+	print "It took {0} usec to run for list generation".format(forlisttime)
+	print "It took {0} usec to run for generation".format(forgentime)
+	print "It took {0} usec to run for mapping".format(formaptime)
